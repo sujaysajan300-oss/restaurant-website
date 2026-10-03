@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>La Tavola | Modern Restaurant</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #222;
+      background: #faf8f4;
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #9b5a36;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: #9b5a36;
+    }
+
+    .nav-button {
+      background: #9b5a36;
+      color: white !important;
+      padding: 11px 18px;
+      border-radius: 5px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh;
+      background:
+        linear-gradient(rgba(0,0,0,.48), rgba(0,0,0,.48)),
+        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 30px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 7vw, 82px);
+      margin-bottom: 15px;
+      font-family: Georgia, serif;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #9b5a36;
+      color: white;
+      padding: 14px 28px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      opacity: .9;
+    }
+
+    .btn-light {
+      background: white;
+      color: #333;
+    }
+
+    /* GENERAL */
+    section {
+      padding: 90px 25px;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title span {
+      color: #9b5a36;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-title h2 {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      margin-top: 8px;
+    }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .about-text h2 {
+      font-family: Georgia, serif;
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      margin-bottom: 18px;
+      color: #666;
+    }
+
+    /* MENU */
+    .menu-section {
+      background: white;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .menu-item {
+      padding: 25px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 1px dashed #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .menu-item h3 {
+      font-family: Georgia, serif;
+      font-size: 21px;
+    }
+
+    .price {
+      color: #9b5a36;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .menu-item p {
+      color: #777;
+    }
+
+    /* FEATURED FOOD */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .food-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    .food-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .food-info {
+      padding: 22px;
+    }
+
+    .food-info h3 {
+      font-family: Georgia, serif;
+      margin-bottom: 8px;
+    }
+
+    .food-info p {
+      color: #777;
+    }
+
+    /* REVIEWS */
+    .reviews {
+      background: #27231f;
+      color: white;
+    }
+
+    .reviews .section-title h2 {
+      color: white;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .review {
+      background: #332e29;
+      padding: 30px;
+      border-radius: 8px;
+    }
+
+    .stars {
+      color: #f2b94b;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .review p {
+      color: #ddd;
+      margin-bottom: 18px;
+    }
+
+    .review strong {
+      color: white;
+    }
+
+    /* BOOKING */
+    .booking {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .booking-info h2 {
+      font-family: Georgia, serif;
+      font-size: 40px;
+      margin-bottom: 18px;
+    }
+
+    .booking-info p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .contact-line {
+      margin: 15px 0;
+      font-weight: bold;
+    }
+
+    form {
+      background: white;
+      padding: 35px;
+      border-radius: 10px;
+      box-shadow: 0 5px 25px rgba(0,0,0,.08);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      font-weight: bold;
+      padding: 15px;
+      border-radius: 5px;
+      background: #9b5a36;
+      color: white;
+    }
+
+    button:hover {
+      opacity: .9;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #171513;
+      color: white;
+      padding: 45px 25px 25px;
+    }
+
+    .footer-grid {
+      max-width: 1150px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    footer h3 {
+      margin-bottom: 15px;
+      color: #d68a5d;
+    }
+
+    footer p,
+    footer li {
+      color: #bbb;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 8px;
+    }
+
+    .copyright {
+      max-width: 1150px;
+      margin: 35px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      text-align: center;
+      color: #888;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .about,
+      .booking {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-grid,
+      .food-grid,
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 75vh;
+      }
+
+      section {
+        padding: 65px 20px;
+      }
+
+      .section-title h2 {
+        font-size: 34px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <nav class="nav">
+      <div class="logo">LA TAVOLA</div>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact" class="nav-button">Book a Table</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p>WELCOME TO LA TAVOLA</p>
+
+      <h1>Good Food.<br>Great Moments.</h1>
+
+      <p>
+        Fresh ingredients, beautiful flavours and unforgettable dining
+        experiences.
+      </p>
+
+      <a href="#menu" class="btn">View Our Menu</a>
+      <a href="#contact" class="btn btn-light">Book a Table</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about">
+
+        <img
+          src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1000&q=85"
+          alt="Restaurant interior"
+        >
+
+        <div class="about-text">
+          <span>OUR STORY</span>
+
+          <h2>A place to enjoy good food.</h2>
+
+          <p>
+            Welcome to La Tavola, a modern restaurant created for people
+            who love great food and memorable experiences.
+          </p>
+
+          <p>
+            Our chefs carefully prepare every dish using fresh ingredients
+            and a combination of traditional techniques and modern flavours.
+          </p>
+
+          <a href="#menu" class="btn">Explore Our Menu</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+
+      <div class="section-title">
+        <span>OUR MENU</span>
+        <h2>Chef's Favourites</h2>
+      </div>
+
+      <div class="menu-grid">
+
+        <div class="menu-item">
+          <div class="menu-top">
+            <h3>Truffle Pasta</h3>
+            <span class="price">$28</span>
+          </div>
+          <p>Creamy pasta, parmesan, mushrooms and fresh truffle.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-top">
+            <h3>Grilled Salmon</h3>
+            <span class="price">$34</span>
+          </div>
+          <p>Fresh salmon, seasonal vegetables and lemon butter.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-top">
+            <h3>Classic Beef Burger</h3>
+            <span class="price">$24</span>
+          </div>
+          <p>Premium beef, cheddar, lettuce, tomato and house sauce.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-top">
+            <h3>Margherita Pizza</h3>
+            <span class="price">$22</span>
+          </div>
+          <p>Tomato, mozzarella, basil and extra virgin olive oil.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-top">
+            <h3>Chicken Risotto</h3>
+            <span class="price">$30</span>
+          </div>
+          <p>Creamy Arborio rice, chicken, herbs and parmesan.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-top">
+            <h3>Chocolate Dessert</h3>
+            <span class="price">$14</span>
+          </div>
+          <p>Rich chocolate cake served with vanilla ice cream.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section>
+    <div class="container">
+
+      <div class="section-title">
+        <span>DISCOVER</span>
+        <h2>Made With Passion</h2>
+      </div>
+
+      <div class="food-grid">
+
+        <div class="food-card">
+          <img
+            src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=85"
+            alt="Fresh pasta"
+          >
+          <div class="food-info">
+            <h3>Fresh Pasta</h3>
+            <p>Hand-prepared pasta with rich, fresh flavours.</p>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <img
+            src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=85"
+            alt="Grilled salmon"
+          >
+          <div class="food-info">
+            <h3>Fresh Ingredients</h3>
+            <p>Quality ingredients prepared with care.</p>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <img
+            src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=85"
+            alt="Dessert"
+          >
+          <div class="food-info">
+            <h3>Perfect Desserts</h3>
+            <p>Finish your meal with something special.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+
+      <div class="section-title">
+        <span>REVIEWS</span>
+        <h2>What Our Guests Say</h2>
+      </div>
+
+      <div class="review-grid">
+
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>
+            "Beautiful atmosphere and absolutely delicious food.
+            We will definitely be coming back."
+          </p>
+          <strong>— Sarah M.</strong>
+        </div>
+
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>
+            "The service was excellent and every dish was beautifully
+            presented."
+          </p>
+          <strong>— James R.</strong>
+        </div>
+
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>
+            "One of our favourite places for a special dinner.
+            Highly recommended."
+          </p>
+          <strong>— Olivia T.</strong>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="contact">
+    <div class="container">
+
+      <div class="booking">
+
+        <div class="booking-info">
+          <span>RESERVATIONS</span>
+
+          <h2>Book Your Table</h2>
+
+          <p>
+            Planning a special dinner? Reserve your table today and
+            enjoy an unforgettable dining experience.
+          </p>
+
+          <div class="contact-line">📍 Auckland, New Zealand</div>
+          <div class="contact-line">📞 09 123 4567</div>
+          <div class="contact-line">✉️ hello@latavola.co.nz</div>
+
+          <p>
+            <strong>Opening Hours</strong><br>
+            Monday – Thursday: 5:00 PM – 10:00 PM<br>
+            Friday – Saturday: 5:00 PM – 11:00 PM<br>
+            Sunday: 5:00 PM – 9:00 PM
+          </p>
+        </div>
+
+        <form onsubmit="bookTable(event)">
+
+          <div class="form-row">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Email Address" required>
+          </div>
+
+          <div class="form-row">
+            <input type="date" required>
+            <input type="time" required>
+          </div>
+
+          <select required>
+            <option value="">Number of Guests</option>
+            <option>1 Guest</option>
+            <option>2 Guests</option>
+            <option>3 Guests</option>
+            <option>4 Guests</option>
+            <option>5 Guests</option>
+            <option>6+ Guests</option>
+          </select>
+
+          <textarea placeholder="Special requests"></textarea>
+
+          <button type="submit">Request a Reservation</button>
+
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+        <h3>LA TAVOLA</h3>
+        <p>
+          Modern food, beautiful atmosphere and memorable moments.
+        </p>
+      </div>
+
+      <div>
+        <h3>QUICK LINKS</h3>
+        <ul>
+          <li><a href="#home" style="color:#bbb;">Home</a></li>
+          <li><a href="#about" style="color:#bbb;">About</a></li>
+          <li><a href="#menu" style="color:#bbb;">Menu</a></li>
+          <li><a href="#contact" style="color:#bbb;">Reservations</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>CONTACT</h3>
+        <p>Auckland, New Zealand</p>
+        <p>09 123 4567</p>
+        <p>hello@latavola.co.nz</p>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 La Tavola. All rights reserved.
+    </div>
+
+  </footer>
+
+  <script>
+    function bookTable(event) {
+      event.preventDefault();
+
+      alert(
+        "Thank you! Your reservation request has been received."
+      );
+    }
+  </script>
+
+</body>
+</html>
